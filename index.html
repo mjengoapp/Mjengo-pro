@@ -1,0 +1,224 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mjengo app</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <section id="home-section">
+        <h1>MJENGO APP</h1>
+        <nav>
+            <a href="#about-section">About the Developer</a>
+            <a href="#catalogue-section">Catalogue</a>
+            <a href="#calculations-section">Calculator</a>
+            <a href="#material-section">material</a>
+            <a href="#catalogue-section">prices</a>
+        </nav>
+        <h2>Introduction</h2>
+        <p>
+            Welcome to the Construction Rate Calculator
+            This application is designed to help builders, contractors, and construction professionals quickly determine the cost of construction work per unit.
+            Many construction tasks such as blockwork, plastering, and other masonry works are commonly measured in square meters. Instead of estimating materials manually, this tool allows you to calculate the rate per square meter based on the materials used and their current prices.
+            With this tool you can:
+            Enter the block size you are using.
+            Specify the mix ratio of materials (such as cement and sand).
+            Input current material prices.
+            Automatically calculate the rate per square meter of the work.
+            The goal is to simplify calculations, reduce estimation errors, and help contractors make faster and more accurate cost decisions on site.
+        </p>
+    </section>
+    <section id="about-section">
+        <h2>About Us</h2>
+        <p>
+            This application was developed by Eric Nyongesa, a trained architect with a strong interest in construction technology and practical site solutions.
+            Having studied architecture and worked closely with construction processes, Eric understands the everyday challenges contractors face when estimating materials and costs. To make these calculations easier and more accessible, he combines his knowledge of construction practices with his skills in programming using Python, HTML, CSS, and JavaScript.
+            The goal of this project is to create simple digital tools that help builders, contractors, and construction professionals save time, improve accuracy, and work more efficiently.
+        </p>
+        <a href="#home-section">home</a>
+    </section>
+    <section id="material-section">
+        <h3>Materials</h3>
+        <select id="material-select" onchange="populateSubMaterials(this,'brand-select')">
+            <option value="">Choose material</option>
+        </select>
+        <select id="brand-select" onchange="getRequiredMaterial(this)">
+            <option>choose brand</option>
+        </select>
+        <h3>Mortar Ratio</h3>
+        <select id="morta-ratio" onchange="storeCostsOnChange(this)">
+            <option value="1:1.5">1:1.5</option>
+            <option value="1:2">1:2</option>
+            <option value="1:3">1:3</option>
+            <option value="1:4">1:4</option>
+            <option value="1:5">1:5</option>
+        </select>
+        <h3>Plaster Mix Ratio</h3>
+        <select id="plaster-ratio" onchange="storeCostsOnChange(this)">
+            <option value="1:1.5">1:1.5</option>
+            <option value="1:2">1:2</option>
+            <option value="1:3">1:3</option>
+            <option value="1:4">1:4</option>
+        </select>
+        <h3>Concrete Mix Ratio</h3>
+        <select id="concrete-ratio" onchange="storeCostsOnChange(this)">
+            <option value="1:1.5:3">1:1.5:3</option>
+            <option value="1:2:4">1:2:4</option>
+            <option value="1:3:5">1:3:5</option>
+            <option value="1:4:8">1:4:8</option>
+        </select>
+        <a href="#calculations-section">Calculator</a>
+    </section>
+    <section id="catalogue-section">
+        <h2>PRICES</h2>
+        <h3>Currency</h3>
+        <select id="currency-select">
+            <option value="Ksh">Ksh</option>
+            <option value="Tsh">Tsh</option>
+            <option value="Ugx">Ugx</option>
+            <option value="Usd">Usd</option>
+            <option value="Eur">Eur</option>
+            <option value="Gbp">Gbp</option>
+        </select>
+        <h3>MATERIALS</h3>
+        <h4>Category</h4>
+        <select id="main-material-select" onchange="populateSubMaterials(this,'sub-material-select')">
+            <option value="">Choose Material</option>
+        </select>
+
+        <h4>Material</h4>
+        <select id="sub-material-select" onchange="getMaterial(this)">
+            <option value="">Choose Submaterial</option>
+        </select>
+
+        <input placeholder="0" type="number" id="price-input">
+        <button onclick="getPrice('price-input')">submit</button>
+        <h3>Labor Percent</h3>
+        <input id="labor" placeholder="40" type="number" onchange="storeCostsOnChange(this)">
+        <h3>Equipment Cost</h3>
+        <input id="equipment" placeholder="12000" type="number" onchange="storeCostsOnChange(this)">
+        <a href="#calculations-section">Calculator</a>
+    </section>
+    <section id="calculations-section">
+        <nav>
+            <a href="#home-section">Home</a>
+            <a href="#walling-section">wall</a>
+            <a href="#concrete-section">Concrete</a>
+            <a href="#plaster-section">Plaster</a>
+            <a href="#steel-section">Reinforcements</a>
+        </nav>
+        <h2>CALCULATIONS</h2>
+    </section>
+    <section id="walling-section">
+        <h2>WALLING</h2>
+        <h3>Area in Square Meters</h3>
+        <input placeholder="100" id="wall-area-input" type="number">
+        <label id="wall-unit-cost-label"></label>
+        <button id="submit-btn" onclick="calculatewalling()">submit</button>
+        <nav>
+            <a href="#calculations-section">home</a>
+            <a href="#material-section">materials</a>
+            <a href="#catalogue-section">prices</a>
+        </nav>
+    </section>
+    <section id="concrete-section">
+        <h2>
+            CONCRETE
+        </h2>
+        <h3>Volume in M³</h3>
+        <input type="number" placeholder="1" id="concrete-volume">
+        <label id="concrete-unit-cost-label"></label>
+        <button id="submit-btn" onclick="calculateConcrete()">submit</button>
+        <nav>
+            <a href="#calculations-section">home</a>
+            <a href="#material-section">materials</a>
+            <a href="#catalogue-section">prices</a>
+        </nav>
+    </section>
+    <section id="plaster-section">
+        <h2>
+            PLASTER
+        </h2>
+        <h3>Area in m²</h3>
+        <input type="number" placeholder="1" id="plaster-area-input">
+        <h3>Plaster Thickness in mm</h3>
+        <input placeholder="50" type="number" id="plaster-thickness-input">
+        <label id="plaster-unit-cost-label"></label>
+        <button id="submit-btn" onclick="calculatePlaster()">submit</button>
+        <nav>
+            <a href="#calculations-section">home</a>
+            <a href="#material-section">materials</a>
+            <a href="#catalogue-section">prices</a>
+        </nav>
+    </section>
+    <section id="steel-section">
+        <a href="#steel-cost-per-unit-weight-section">Cost</a>
+        <a href="#bars-section">Bars</a>
+        <a href="#links-section">links</a>
+        <a href="#column-foundation-section">column foundations</a>
+        <h2>REINFORCEMENTS</h2>
+        <nav>
+            <a href="#calculations-section">home</a>
+            <a href="#material-section">materials</a>
+            <a href="#catalogue-section">prices</a>
+        </nav>
+    </section>
+    <section id="steel-cost-per-unit-weight-section">
+        <h3>Quantity</h3>
+        <input placeholder="1" type="number" id="bar-number">
+        <label id="steel-unit-label"></label>
+        <button onclick="calculateSteelPricePerUnitWeight()">Submit</button>
+        <a href="#steel-section">home</a>
+    </section>
+    <section id="bars-section">
+        <h2>FULL BARS</h2>
+        <h3>Bar Length in mm</h3>
+        <input type="number" placeholder="4000" id="bar-length-input">
+        <h3>Number</h3>
+        <input type="number" placeholder="6" id="bar-number-input">
+        <label id="bar-number-label"></label>
+        <button onclick="calculateFullBars()">Submit</button>
+        <a id="#steel-section">home</a>
+    </section>
+    <section id="links-section">
+        <h2>LINKS</h2>
+        <h3>cover in mm</h3>
+        <input placeholder="50" type="number" id="cover-input">
+        <h3>length in mm</h3>
+        <input type="number" id="length-input" placeholder="3000">
+        <h3>Width in mm</h3>
+        <input type="number" id="width-input" placeholder="200">
+        <h3>Depth in mm</h3>
+        <input type="number" id="depth-input" placeholder="300">
+        <h3>Number ofStructure</h3>
+        <input type="number" id="number-input" placeholder="1">
+        <h3>Spacing in mm</h3>
+        <input id="spacing-input" type="number" placeholder="200">
+        <label id="ring-bar-number-label"></label>
+        <button onclick="getRings()">submit</button>
+        <a href="#steel-section">home</a>
+    </section>
+    <section id="column-foundation-section">
+        <h2>COLUMN FOUNDATION REBAR</h2>
+        <h3>Cover in mm</h3>
+        <input type="number" id="column-foundation-cover-input" placeholder="50">
+        <h3>length in mm</h3>
+        <input type="number" id="column-foundation-length-input" placeholder="1200">
+        <h3>Width in mm</h3>
+        <input type="number" id="column-foundation-width-input" placeholder="1200">
+        <h3>Depth in mm</h3>
+        <input type="number" id="column-foundation-depth-input" placeholder="350">
+        <h3>number of columns</h3>
+        <input type="number" id="column-foundation-number-input" placeholder="1">
+        <h3>Spacing in mm</h3>
+        <input type="number" id="column-foundation-spacing-input" placeholder="200">
+        <label id="column-foundation-label"></label>
+        <button onclick="calculateColumnFoundationRebar()">Submit</button>
+        <a href="#steel-section">home</a>
+    </section>
+    <section>
+        <h2>COLUMN STARTER MAIN BAR</h2>
+        <a href="#steel-section">home</a>
+    </section>
+    <script src="index.js"></script>
+</body>
+</html>
