@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Login</title>
+</head>
+<body>
+
+<h3>login</h3>
+<button onclick="login()">Login with Google</button>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+// 🔥 Your Firebase config
+const firebaseConfig = {
+    apiKey: "AIzaSyBGxljD6Uze6N_7UveOIoO62IjBkO6TrRE",
+    authDomain: "login-practice-5b1f7.firebaseapp.com",
+    projectId: "login-practice-5b1f7",
+    storageBucket: "login-practice-5b1f7.firebasestorage.app",
+    messagingSenderId: "257243154987",
+    appId: "1:257243154987:web:be1a66a059bec2d42b786e",
+    measurementId: "G-D58B716ZNS"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Auth + DB
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+// 🔥 Login function
+window.login = async function () {
+    try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        
+        alert("Welcome " + user.displayName);
+        
+        await setDoc(doc(db, "users", user.uid), {
+            name: user.displayName,
+            email: user.email,
+            isSubscribed: false
+        });
+        
+        localStorage.setItem("email", user.email);
+        console.log(user.email);
+        window.location.href = "index.html";
+        
+    } catch (error) {
+        console.error(error);
+        alert("Login failed: " + error.message);
+    }
+}
+</script>
+
+</body>
+</html>

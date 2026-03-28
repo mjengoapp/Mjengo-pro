@@ -1,0 +1,35 @@
+<!<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+    <html>
+    <head>
+        <script src="https://js.paystack.co/v2/inline.js"></script>
+    </head>
+    <body>
+        <input id="cost" placeholder="2000" type="number">
+        <button onclick="pay()">pay now</button>
+        <script>
+            let success;
+            function pay(){
+                const cost = 1*100
+                let handler = PaystackPop.setup(
+                    {
+                        key:"pk_live_65ecfc74a2786e21f5b43486b1ce713abd270f9b",
+                        email:"shakanishamjengo@gmail.com",
+                        amount:cost,
+                        currency:"KES",
+                        callback:function(response){
+                            success = true;
+                        },
+                        onclose:function(){
+                            success = false
+                            
+                        }
+                    }
+                    );
+                handler.openIframe();
+                console.log (success)
+            }
+        </script>
+    </body>
+</html>
+

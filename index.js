@@ -23,10 +23,10 @@ let activeMaterials = {
     blocks: "",
     steel: ""
 };
-function storeCostsOnChange(el){
-    value=el.value;
+function storeCostsOnChange(el) {
+    value = el.value;
     name = el.id;
-    localStorage.setItem(name,value)
+    localStorage.setItem(name, value)
 }
 let currentMainMaterial = ""; // Track which main material is being selected
 
@@ -340,11 +340,11 @@ function calculateConcrete() {
     }
 
     const volume = parseFloat(document.getElementById("concrete-volume").value) || 0;
-     equipmentCost = parseFloat(localStorage.getItem("equipment")) || 0;
+    equipmentCost = parseFloat(localStorage.getItem("equipment")) || 0;
     const ballastPrice = parseFloat(localStorage.getItem(ballast)) || 0;
     const cementPrice = parseFloat(localStorage.getItem(cement)) || 0;
     const sandPrice = parseFloat(localStorage.getItem(sand)) || 0;;
-     laborPercent = parseFloat(localStorage.getItem("labor")) || 0;
+    laborPercent = parseFloat(localStorage.getItem("labor")) || 0;
     const ratio = localStorage.getItem("concrete-ratio");
     const currency = document.getElementById("currency-select").value;
 
@@ -390,8 +390,8 @@ function calculatePlaster() {
     }
     const cementPrice = parseFloat(localStorage.getItem(cement)) || 0;
     const sandPrice = parseFloat(localStorage.getItem(sand)) || 0;
-     laborPercent = parseFloat(localStorage.getItem("labor")) || 0;
-    const ratio = localStorage.getItem("plaster-ratio")||"1:3";
+    laborPercent = parseFloat(localStorage.getItem("labor")) || 0;
+    const ratio = localStorage.getItem("plaster-ratio") || "1:3";
     const currency = document.getElementById("currency-select").value;
 
     // Check if area and thickness are valid
@@ -426,7 +426,7 @@ function calculateSteelPricePerUnitWeight() {
     const quantity = parseFloat(document.getElementById("bar-number").value) || 0;
     const price = parseFloat(localStorage.getItem(steel)) || 0;
     console.log(price)
-     labor = parseFloat(localStorage.getItem("labor")) || 0;
+    labor = parseFloat(localStorage.getItem("labor")) || 0;
     const label = document.getElementById("steel-unit-label");
     const currency = document.getElementById("currency-select").value;
 
